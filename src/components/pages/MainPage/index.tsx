@@ -1,15 +1,14 @@
 import React from "react";
 import { BackgroundColor, BackgroundImage } from "./styled";
 import WeatherBackgroundImage from "../../../assets/images/weather_background.jpg";
+import WeatherDetails from "../../organisms/WeatherDetails";
+import Title from "../../atoms/Title";
 
-interface MainPageProps {
-  children: React.ReactChild;
-}
-
-const MainPage: React.FC<MainPageProps> = ({ children }) => {
+const MainPage: React.FC = () => {
   return (
     <div>
-      {children}
+      <Title title="The Weather App" />
+      <WeatherDetails />
       <BackgroundImage
         src={WeatherBackgroundImage}
         alt="weather background image"
