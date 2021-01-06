@@ -6,13 +6,23 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import DirectionsIcon from "@material-ui/icons/Directions";
 import { useStyles } from "./styled";
+import { useDispatch, useSelector } from "react-redux";
+import { selectInputCity, typeCity } from "../../../slices/WeatherSlice";
 
 const SearchInput: React.FC = () => {
+  const dispatch = useDispatch();
+  const city = useSelector(selectInputCity);
   const classes = useStyles();
+
+  const handleInputChange = (event:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    dispatch(typeCity(event.currentTarget.value));
+  };
 
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
+        onChange={handleInputChange}
+        value={city}
         className={classes.input}
         placeholder="Enter Your City..."
         inputProps={{ "aria-label": "enter your city" }}
