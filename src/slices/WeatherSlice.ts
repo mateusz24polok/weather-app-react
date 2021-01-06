@@ -23,12 +23,17 @@ const WeatherSlice = createSlice({
     typeCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
     },
+
+    fetchWeather: (state) => {
+      console.log("Weather featching has been started");
+    },
   },
 });
 
 export const selectWeatherSliceState = (state: RootState) => state.weather;
-export const selectInputCity = (state: RootState) => selectWeatherSliceState(state).city;
+export const selectInputCity = (state: RootState) =>
+  selectWeatherSliceState(state).city;
 
-export const { typeCity } = WeatherSlice.actions;
+export const { typeCity, fetchWeather } = WeatherSlice.actions;
 
 export default WeatherSlice.reducer;

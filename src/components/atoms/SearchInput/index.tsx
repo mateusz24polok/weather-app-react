@@ -7,7 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import DirectionsIcon from "@material-ui/icons/Directions";
 import { useStyles } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
-import { selectInputCity, typeCity } from "../../../slices/WeatherSlice";
+import { selectInputCity, typeCity, fetchWeather } from "../../../slices/WeatherSlice";
 
 const SearchInput: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,8 +18,13 @@ const SearchInput: React.FC = () => {
     dispatch(typeCity(event.currentTarget.value));
   };
 
+  const handleCitySearch = (event: React.FormEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    dispatch(fetchWeather());
+  }
+
   return (
-    <Paper component="form" className={classes.root}>
+    <Paper component="form" className={classes.root} onSubmit={handleCitySearch}>
       <InputBase
         onChange={handleInputChange}
         value={city}
