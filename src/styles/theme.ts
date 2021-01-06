@@ -4,6 +4,7 @@ declare module "styled-components" {
   export interface DefaultTheme {
     colors: {
       contours: string;
+      detailsText: string;
     };
   }
 }
@@ -11,5 +12,6 @@ declare module "styled-components" {
 export const theme: DefaultTheme = {
   colors: {
     contours: "white",
+    detailsText: "#E1DCDB",
   },
 };
