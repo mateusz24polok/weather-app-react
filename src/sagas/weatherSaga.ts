@@ -1,4 +1,4 @@
-import { takeLatest, select, call, put } from "redux-saga/effects";
+import { takeLatest, select, call, put, delay } from "redux-saga/effects";
 import {
   fetchWeather,
   fetchWeatherSuccess,
@@ -11,6 +11,7 @@ function* fetchWeatherWorker() {
   try {
     const city = yield select(selectInputCity);
     const weather = yield call(getWeather, city);
+    yield delay(500);
     yield put(fetchWeatherSuccess(weather));
   } catch (error) {
     yield put(fetchWeatherError);

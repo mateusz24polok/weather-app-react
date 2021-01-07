@@ -63,6 +63,10 @@ export const selectInputCity = (state: RootState) =>
   selectWeatherSliceState(state).city;
 export const selectWeather = (state: RootState) =>
   selectWeatherSliceState(state).weather;
+export const selectLoadingState = (state: RootState) =>
+  selectWeatherSliceState(state).loading;
+export const selectErrorState = (state: RootState) =>
+  selectWeatherSliceState(state).error;
 
 export const {
   typeCity,

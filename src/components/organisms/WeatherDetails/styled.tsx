@@ -1,16 +1,27 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type DetailTextProps = {
   right?: boolean;
 };
 
-export const Container = styled.div`
+type ContainerProps = {
+  $loading?: boolean;
+};
+
+export const Container = styled.div<ContainerProps>`
   border: 2px solid ${({ theme }) => theme.colors.contours};
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 30px 10px;
+  min-height: 280px;
+
+  ${({$loading}) => $loading && css`
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  `}
 `;
 
 export const City = styled.p`
