@@ -6,14 +6,22 @@ interface stateType {
   error: boolean;
   loading: boolean;
   city: string;
-  weather: {} | Weather;
+  weather: Weather;
 }
 
 const initialState: stateType = {
   error: false,
   loading: false,
   city: "",
-  weather: {},
+  weather: {
+    city: "Toronto",
+    country: "CA",
+    description: "Light Rain",
+    humidity: 77,
+    icon: "01d",
+    temperature: 32,
+    windSpeed: 2.1,
+  },
 };
 
 const WeatherSlice = createSlice({
@@ -53,6 +61,8 @@ const WeatherSlice = createSlice({
 export const selectWeatherSliceState = (state: RootState) => state.weather;
 export const selectInputCity = (state: RootState) =>
   selectWeatherSliceState(state).city;
+export const selectWeather = (state: RootState) =>
+  selectWeatherSliceState(state).weather;
 
 export const {
   typeCity,

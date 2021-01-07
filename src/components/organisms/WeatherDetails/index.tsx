@@ -9,28 +9,44 @@ import {
   DetailsText,
   DetailsBox,
 } from "./styled";
-
-const sampleWeatherIconLink = "http://openweathermap.org/img/wn/10d@2x.png";
+import { useSelector } from "react-redux";
+import { selectWeather } from "../../../slices/WeatherSlice";
+import {
+  getCelsiusTemperature,
+  getFahrenheitTemperature,
+} from "../../../helpers/temperatureFunctions";
 
 const WeatherDetails: React.FC = () => {
+  const weather = useSelector(selectWeather);
+
+  const sampleWeatherIconLink = `http://openweathermap.org/img/wn/${weather.icon}@2x.png`;
+
+  const today = new Date().toDateString();
+
   return (
     <Container>
-      <City>Toronto, CA</City>
+      <City>
+        {weather.city} {weather.country}
+      </City>
       <IconAndTemperatureContainer>
         <WeatherIcon
           IconLink={sampleWeatherIconLink}
           AltDescription="cloudy weather"
         />
-        <Temperature>61°F | 32°C</Temperature>
+        <Temperature>
+          {`${getCelsiusTemperature(
+            weather.temperature
+          )}°C | ${getFahrenheitTemperature(weather.temperature)}°F`}
+        </Temperature>
       </IconAndTemperatureContainer>
       <DetailsContainer>
         <DetailsBox>
-          <DetailsText>Wind: 2.1 mph</DetailsText>
-          <DetailsText>Humidity: 77 %</DetailsText>
+          <DetailsText>Wind: {weather.windSpeed}</DetailsText>
+          <DetailsText>Humidity: {weather.humidity} %</DetailsText>
         </DetailsBox>
         <DetailsBox>
-          <DetailsText right>Wednesday 06.01.2021</DetailsText>
-          <DetailsText right>Light Rain</DetailsText>
+          <DetailsText right>{today}</DetailsText>
+          <DetailsText right>{weather.description}</DetailsText>
         </DetailsBox>
       </DetailsContainer>
     </Container>
