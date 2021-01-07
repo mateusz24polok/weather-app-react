@@ -1,7 +1,9 @@
 export interface Weather {
   city: string;
   country: string;
-  windSpeed: number;
-  humidity: number;
   description: string;
+  humidity: number;
+  icon: string;
+  temperature: number;
+  windSpeed: number;
 }

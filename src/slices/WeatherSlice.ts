@@ -25,7 +25,27 @@ const WeatherSlice = createSlice({
     },
 
     fetchWeather: (state) => {
-      console.log("Weather featching has been started");
+      state.loading = true;
+    },
+
+    fetchWeatherSuccess: (state, action: PayloadAction<any>) => {
+      state.city = "";
+      state.error = false;
+      state.loading = false;
+      state.weather = {
+        city: action.payload?.name,
+        country: action.payload?.country,
+        description: action.payload?.weather[0]?.description,
+        humidity: action.payload?.main?.humidity,
+        icon: action.payload?.weather[0]?.icon,
+        temperature: action.payload?.main?.temp,
+        windSpeed: action.payload?.wind?.speed,
+      };
+    },
+
+    fetchWeatherError: (state) => {
+      state.error = true;
+      state.loading = false;
     },
   },
 });
@@ -34,6 +54,11 @@ export const selectWeatherSliceState = (state: RootState) => state.weather;
 export const selectInputCity = (state: RootState) =>
   selectWeatherSliceState(state).city;
 
-export const { typeCity, fetchWeather } = WeatherSlice.actions;
+export const {
+  typeCity,
+  fetchWeather,
+  fetchWeatherSuccess,
+  fetchWeatherError,
+} = WeatherSlice.actions;
 
 export default WeatherSlice.reducer;
