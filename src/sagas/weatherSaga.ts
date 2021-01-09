@@ -1,16 +1,16 @@
-import { takeLatest, select, call, put, delay } from "redux-saga/effects";
+import { takeLatest, call, put, delay } from "redux-saga/effects";
 import {
   fetchWeather,
   fetchWeatherSuccess,
   fetchWeatherError,
-  selectInputCity,
 } from "../slices/WeatherSlice";
 import { getWeather } from "../api/api";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-function* fetchWeatherWorker() {
+function* fetchWeatherWorker(action: PayloadAction<string>) {
   try {
-    const city = yield select(selectInputCity);
-    const weather = yield call(getWeather, city);
+    console.log(action.payload);
+    const weather = yield call(getWeather, action.payload);
     yield delay(500);
     yield put(fetchWeatherSuccess(weather));
   } catch (error) {

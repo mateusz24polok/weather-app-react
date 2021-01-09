@@ -14,13 +14,13 @@ const initialState: stateType = {
   loading: false,
   city: "",
   weather: {
-    city: "Toronto",
-    country: "CA",
-    description: "Light Rain",
-    humidity: 77,
-    icon: "01d",
-    temperature: 32,
-    windSpeed: 2.1,
+    city: null,
+    country: null,
+    description: null,
+    humidity: null,
+    icon: null,
+    temperature: null,
+    windSpeed: null,
   },
 };
 
@@ -32,7 +32,7 @@ const WeatherSlice = createSlice({
       state.city = action.payload;
     },
 
-    fetchWeather: (state) => {
+    fetchWeather: (state, action: PayloadAction<string>) => {
       state.loading = true;
     },
 

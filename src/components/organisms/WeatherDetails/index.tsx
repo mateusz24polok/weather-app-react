@@ -24,7 +24,7 @@ const WeatherDetails: React.FC = () => {
   const weather = useSelector(selectWeather);
   const loadingState = useSelector(selectLoadingState);
 
-  const sampleWeatherIconLink = `http://openweathermap.org/img/wn/${weather.icon}@2x.png`;
+  const weatherIconLink = `http://openweathermap.org/img/wn/${weather.icon}@2x.png`;
 
   const today = new Date().toDateString();
 
@@ -39,7 +39,7 @@ const WeatherDetails: React.FC = () => {
           </City>
           <IconAndTemperatureContainer>
             <WeatherIcon
-              IconLink={sampleWeatherIconLink}
+              IconLink={weatherIconLink}
               AltDescription="cloudy weather"
             />
             <Temperature>

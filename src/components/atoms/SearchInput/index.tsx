@@ -18,7 +18,7 @@ const SearchInput: React.FC = () => {
 
   const handleCitySearch = (event: React.FormEvent<HTMLDivElement>) => {
     event.preventDefault();
-    dispatch(fetchWeather());
+    dispatch(fetchWeather(city));
   }
 
   return (
