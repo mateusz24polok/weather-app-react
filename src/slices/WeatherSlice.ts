@@ -54,6 +54,7 @@ const WeatherSlice = createSlice({
     fetchWeatherError: (state) => {
       state.error = true;
       state.loading = false;
+      state.city = "";
     },
   },
 });

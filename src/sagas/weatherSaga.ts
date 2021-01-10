@@ -9,12 +9,14 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 function* fetchWeatherWorker(action: PayloadAction<string>) {
   try {
-    console.log(action.payload);
     const weather = yield call(getWeather, action.payload);
+    if (!weather) {
+      throw new Error("Błąd API");
+    }
     yield delay(500);
     yield put(fetchWeatherSuccess(weather));
   } catch (error) {
-    yield put(fetchWeatherError);
+    yield put(fetchWeatherError());
     console.error(error);
   }
 }
