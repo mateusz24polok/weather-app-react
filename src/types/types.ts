@@ -7,3 +7,8 @@ export interface Weather {
   temperature: number | null;
   windSpeed: number | null;
 }
+
+export interface Error {
+  errorState: boolean;
+  errorCity: string;
+}

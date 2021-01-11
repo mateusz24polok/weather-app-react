@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Weather } from "../types/types";
+import { Weather, Error } from "../types/types";
 import { RootState } from "../store";
 
 interface stateType {
-  error: boolean;
+  error: Error;
   loading: boolean;
   city: string;
   weather: Weather;
 }
 
 const initialState: stateType = {
-  error: false,
+  error: {
+    errorState: false,
+    errorCity: "",
+  },
   loading: false,
   city: "",
   weather: {
@@ -38,7 +41,7 @@ const WeatherSlice = createSlice({
 
     fetchWeatherSuccess: (state, action: PayloadAction<any>) => {
       state.city = "";
-      state.error = false;
+      state.error.errorState = false;
       state.loading = false;
       state.weather = {
         city: action.payload?.name,
@@ -51,8 +54,9 @@ const WeatherSlice = createSlice({
       };
     },
 
-    fetchWeatherError: (state) => {
-      state.error = true;
+    fetchWeatherError: (state, action: PayloadAction<string>) => {
+      state.error.errorState = true;
+      state.error.errorCity = action.payload;
       state.loading = false;
       state.city = "";
     },
@@ -67,7 +71,9 @@ export const selectWeather = (state: RootState) =>
 export const selectLoadingState = (state: RootState) =>
   selectWeatherSliceState(state).loading;
 export const selectErrorState = (state: RootState) =>
-  selectWeatherSliceState(state).error;
+  selectWeatherSliceState(state).error.errorState;
+export const selectErrorCity = (state: RootState) =>
+  selectWeatherSliceState(state).error.errorCity;
 
 export const {
   typeCity,

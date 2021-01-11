@@ -20,6 +20,7 @@ import {
   getFahrenheitTemperature,
 } from "../../../helpers/temperatureFunctions";
 import LoadingSpinner from "../../atoms/LoadingSpinner";
+import ErrorInfo from "../../molecules/ErrorInfo/";
 
 const WeatherDetails: React.FC = () => {
   const weather = useSelector(selectWeather);
@@ -37,7 +38,7 @@ const WeatherDetails: React.FC = () => {
       ) : (
         <>
           {errorState ? (
-            <p>Error - something goes wrong (here should be Error component)</p>
+            <ErrorInfo />
           ) : (
             <>
               <City>

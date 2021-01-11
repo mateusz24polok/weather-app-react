@@ -11,12 +11,12 @@ function* fetchWeatherWorker(action: PayloadAction<string>) {
   try {
     const weather = yield call(getWeather, action.payload);
     if (!weather) {
-      throw new Error("Błąd API");
+      throw new Error("API fail");
     }
     yield delay(500);
     yield put(fetchWeatherSuccess(weather));
   } catch (error) {
-    yield put(fetchWeatherError());
+    yield put(fetchWeatherError(action.payload));
     console.error(error);
   }
 }
