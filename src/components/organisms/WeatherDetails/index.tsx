@@ -41,7 +41,7 @@ const WeatherDetails: React.FC = () => {
             <ErrorInfo />
           ) : (
             <>
-              <City>
+              <City data-testid="city">
                 {weather.city} {weather.country}
               </City>
               <IconAndTemperatureContainer>
